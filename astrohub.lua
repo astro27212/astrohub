@@ -28,6 +28,7 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
+
 local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
 local MainSection = MainTab:CreateSection("Main")
 
@@ -138,6 +139,12 @@ local Button = MainTab:CreateButton({
             -- Load ESP
             espScript = loadstring(game:HttpGet("https://pastebin.com/raw/s7viVmDR"))()
             espEnabled = true
+	Rayfield:Notify({
+   Title = "ESP",
+   Content = "Toggle esp using Q",
+   Duration = 6.5,
+   Image = 4483362458,
+})			
         end
     end,
 })
@@ -148,6 +155,13 @@ local Button = MainTab:CreateButton({
 local Button = MainTab:CreateButton({
    Name = "Triggerbot",
    Callback = function()
+
+			Rayfield:Notify({
+   Title = "Triggerbot",
+   Content = "Toggle Triggerbot using E",
+   Duration = 6.5,
+   Image = 4483362458,
+})
        -- Instructions: To enable the triggerbot, press E, to change the keybind go down to instruction 2.
 
        -- // Variables \ --
@@ -324,6 +338,7 @@ local Button = MainTab:CreateButton({
    end,
 })
 
+Window.ModifyTheme('Amethyst')
 
 
 
