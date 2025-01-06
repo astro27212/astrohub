@@ -320,8 +320,9 @@ aimbot.Settings.Enabled = false
 aimbot.Settings.WallCheck = false
 aimbot.Settings.Sensitivity = 1
 aimbot.Settings.TeamCheck = false
-aimbot.FOVSettings.Radius = 90
 LockPart = "Head"
+aimbot.Settings.LockMode = 2
+
 
 
 local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Exunys-ESP/main/src/ESP.lua"))()
@@ -375,7 +376,7 @@ local SensitivitySlider = AimTab:CreateSlider({
  
 
  local RadiusSlider = AimTab:CreateSlider({
-    Name = "Radius",
+    Name = "Radius (May Break The aimbot)",
     Range = {60, 300},
     Increment = 1,
     Suffix = nil,
