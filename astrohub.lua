@@ -1,4 +1,3 @@
-
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 
@@ -8,36 +7,41 @@ local Window = Rayfield:CreateWindow({
    LoadingSubtitle = "by a261",
    ConfigurationSaving = {
       Enabled = false,
-      FolderName = nil, -- Create a custom folder for your hub/game
+      FolderName = nil, 
       FileName = "astrohub"
    },
    Discord = {
       Enabled = true,
-      Invite = "qxJGZzySGa", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
-      RememberJoins = false -- Set this to false to make them join the discord every time they load it up
+      Invite = "qxJGZzySGa", 
+      RememberJoins = false 
    },
-   KeySystem = false, -- Set this to true to use our key system
+   KeySystem = false, 
    KeySettings = {
       Title = "Key | Astro Hub",
       Subtitle = "Key System",
       Note = "Get Key from a261",
-      FileName = "astrohubkey", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
-      SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"astroisthebest"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+      FileName = "astrohubkey", 
+      SaveKey = false, 
+      GrabKeyFromSite = false, 
+      Key = {"astroisthebest"} 
    }
 })
 
-
-local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
+local MainTab = Window:CreateTab("🏠 Home", nil) 
 local MainSection = MainTab:CreateSection("Main")
+
+local AimTab = Window:CreateTab("🔫 Aimbot", nil) 
+local AimbotSection = AimTab:CreateSection("Aimbot")
+
+local EspTab = Window:CreateTab("👁️ ESP", nil) 
+local AimbotSection = EspTab:CreateSection("ESP")
 
 Rayfield:Notify({
    Title = "You executed the script",
    Content = "Astro HUB",
    Duration = 5,
    Image = 13047715178,
-   Actions = { -- Notification Buttons
+   Actions = { 
       Ignore = {
          Name = "Okay!",
          Callback = function()
@@ -50,17 +54,14 @@ Rayfield:Notify({
 local Button = MainTab:CreateButton({
    Name = "Infinite Jump Toggle",
    Callback = function()
-       --Toggles the infinite jump between on or off on every script run
+       
 _G.infinjump = not _G.infinjump
 
 if _G.infinJumpStarted == nil then
-	--Ensures this only runs once to save resources
 	_G.infinJumpStarted = true
 	
-	--Notifies readiness
 	game.StarterGui:SetCore("SendNotification", {Title="Astro Hub"; Text="Infinite Jump Activated!"; Duration=5;})
 
-	--The actual infinite jump
 	local plr = game:GetService('Players').LocalPlayer
 	local m = plr:GetMouse()
 	m.KeyDown:connect(function(k)
@@ -83,7 +84,7 @@ local Slider = MainTab:CreateSlider({
    Increment = 1,
    Suffix = "Speed",
    CurrentValue = 16,
-   Flag = "sliderws", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "sliderws",
    Callback = function(Value)
         local players = game:GetService("Players");
         players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
@@ -96,7 +97,7 @@ local Slider = MainTab:CreateSlider({
    Increment = 1,
    Suffix = "Speed",
    CurrentValue = 16,
-   Flag = "sliderjp", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Flag = "sliderjp",
    Callback = function(Value)
    local players = game:GetService("Players");
         players.LocalPlayer.Character.Humanoid.UseJumpPower = true
@@ -121,7 +122,6 @@ local Input = MainTab:CreateInput({
    end,
 })
 
-
 local espEnabled = false
 local espScript = nil
 
@@ -129,17 +129,15 @@ local Button = MainTab:CreateButton({
     Name = "ESP Toggle",
     Callback = function()
         if espEnabled then
-            -- Unload ESP (remove drawings)
             if espScript then
                 espScript:Remove()
                 espScript = nil
             end
             espEnabled = false
         else
-            -- Load ESP
             espScript = loadstring(game:HttpGet("https://pastebin.com/raw/s7viVmDR"))()
             espEnabled = true
-	Rayfield:Notify({
+            Rayfield:Notify({
    Title = "ESP",
    Content = "Toggle esp using Q",
    Duration = 6.5,
@@ -149,23 +147,15 @@ local Button = MainTab:CreateButton({
     end,
 })
 
-
-
-
 local Button = MainTab:CreateButton({
    Name = "Triggerbot",
    Callback = function()
-
 			Rayfield:Notify({
    Title = "Triggerbot",
    Content = "Toggle Triggerbot using E",
    Duration = 6.5,
    Image = 4483362458,
 })
-       -- Instructions: To enable the triggerbot, press E, to change the keybind go down to instruction 2.
-
-       -- // Variables \ --
-
        _G.triggerbot = false
 
        local player = game:GetService("Players").LocalPlayer
@@ -174,18 +164,15 @@ local Button = MainTab:CreateButton({
        local Clicked = false
        local UserInputService = game:GetService("UserInputService")
 
-       -- Function to toggle triggerbot and display notification
        local function toggleTriggerbot()
            _G.triggerbot = not _G.triggerbot
            Rayfield:Notify({
                Title = "Triggerbot Status",
                Content = "Triggerbot is now " .. (_G.triggerbot and "ON" or "OFF"),
-               Duration = 6.5, -- Notification lasts for 6.5 seconds
-               Image = 4483362458, -- Change this to an appropriate image ID if needed
+               Duration = 6.5,
+               Image = 4483362458,
            })
        end
-
-       -- // Side Scripts \ --
 
        UserInputService.InputBegan:Connect(function(Input, GameProcessedEvent)
            if GameProcessedEvent then
@@ -196,8 +183,6 @@ local Button = MainTab:CreateButton({
                toggleTriggerbot()
            end
        end)
-
-       -- // Main Scripts \ --
 
        game:GetService("RunService").RenderStepped:Connect(function()
            if (mouse.Target and 
@@ -224,7 +209,7 @@ local Button = MainTab:CreateButton({
 })
 
 local flying = false
-local speed = 50 -- Flying speed
+local speed = 50
 local player = game:GetService("Players").LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
@@ -233,18 +218,15 @@ local bodyGyro, bodyVelocity
 local userInputService = game:GetService("UserInputService")
 local connection
 
--- Variable to hold current velocity and direction
 local moveDirection = Vector3.new(0, 0, 0)
 
 local Button = MainTab:CreateButton({
    Name = "Toggle Flying",
    Callback = function()
-       -- Function to start flying
        local function startFlying()
            if not flying then
                flying = true
 
-               -- Create BodyGyro and BodyVelocity
                bodyGyro = Instance.new("BodyGyro")
                bodyGyro.MaxTorque = Vector3.new(400000, 400000, 400000)
                bodyGyro.CFrame = humanoidRootPart.CFrame
@@ -252,43 +234,38 @@ local Button = MainTab:CreateButton({
 
                bodyVelocity = Instance.new("BodyVelocity")
                bodyVelocity.MaxForce = Vector3.new(400000, 400000, 400000)
-               bodyVelocity.Velocity = Vector3.new(0, 0, 0) -- Initially no velocity
+               bodyVelocity.Velocity = Vector3.new(0, 0, 0)
                bodyVelocity.Parent = humanoidRootPart
 
-               -- Notify that flying is enabled
                Rayfield:Notify({
                    Title = "Flying Enabled",
                    Content = "You are now flying!",
                    Duration = 4,
-                   Image = 4483362458, -- Use the default image or change to your preferred one
+                   Image = 4483362458,
                })
 
-               -- Connection to update flight movement
                connection = game:GetService("RunService").RenderStepped:Connect(function()
-                   -- Listen for movement input (WASD or arrow keys)
                    moveDirection = Vector3.new(0, 0, 0)
 
                    if userInputService:IsKeyDown(Enum.KeyCode.W) then
-                       moveDirection = moveDirection + camera.CFrame.LookVector -- Move forward in camera direction
+                       moveDirection = moveDirection + camera.CFrame.LookVector
                    end
                    if userInputService:IsKeyDown(Enum.KeyCode.S) then
-                       moveDirection = moveDirection - camera.CFrame.LookVector -- Move backward in camera direction
+                       moveDirection = moveDirection - camera.CFrame.LookVector
                    end
                    if userInputService:IsKeyDown(Enum.KeyCode.A) then
-                       moveDirection = moveDirection - camera.CFrame.RightVector -- Move left
+                       moveDirection = moveDirection - camera.CFrame.RightVector
                    end
                    if userInputService:IsKeyDown(Enum.KeyCode.D) then
-                       moveDirection = moveDirection + camera.CFrame.RightVector -- Move right
+                       moveDirection = moveDirection + camera.CFrame.RightVector
                    end
 
-                   -- Add movement for vertical direction
                    if userInputService:IsKeyDown(Enum.KeyCode.Space) then
-                       moveDirection = moveDirection + Vector3.new(0, 1, 0) -- Move up
+                       moveDirection = moveDirection + Vector3.new(0, 1, 0)
                    elseif userInputService:IsKeyDown(Enum.KeyCode.LeftControl) then
-                       moveDirection = moveDirection - Vector3.new(0, 1, 0) -- Move down
+                       moveDirection = moveDirection - Vector3.new(0, 1, 0)
                    end
 
-                   -- Apply movement direction to BodyVelocity
                    if moveDirection.Magnitude > 0 then
                        bodyVelocity.Velocity = moveDirection.Unit * speed
                    else
@@ -298,18 +275,15 @@ local Button = MainTab:CreateButton({
            end
        end
 
-       -- Function to stop flying
        local function stopFlying()
            if flying then
                flying = false
 
-               -- Disconnect the RenderStepped connection
                if connection then
                    connection:Disconnect()
                    connection = nil
                end
 
-               -- Remove BodyGyro and BodyVelocity
                if bodyGyro then
                    bodyGyro:Destroy()
                    bodyGyro = nil
@@ -319,17 +293,15 @@ local Button = MainTab:CreateButton({
                    bodyVelocity = nil
                end
 
-               -- Notify that flying is disabled
                Rayfield:Notify({
                    Title = "Flying Disabled",
                    Content = "You are no longer flying.",
                    Duration = 4,
-                   Image = 4483362458, -- Use the default image or change to your preferred one
+                   Image = 4483362458,
                })
            end
        end
 
-       -- Toggle flying on and off
        if flying then
            stopFlying()
        else
@@ -338,10 +310,110 @@ local Button = MainTab:CreateButton({
    end,
 })
 
+
+
+
+local AimbotModule = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Aimbot-V3/main/src/Aimbot.lua"))()
+AimbotModule()
+local aimbot = ExunysDeveloperAimbot
+aimbot.Settings.Enabled = false
+aimbot.Settings.WallCheck = false
+aimbot.Settings.Sensitivity = 1
+aimbot.Settings.TeamCheck = false
+aimbot.FOVSettings.Radius = 90
+LockPart = "Head"
+
+
+local ESPLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/Exunys/Exunys-ESP/main/src/ESP.lua"))()
+ExunysDeveloperESP()
+-- ESPLibrary and getgenv().ExunysDeveloperESP is equivalent.
+local espm = ExunysDeveloperESP
+espm.Settings.Enabled = false
+
+
+local Toggle = AimTab:CreateToggle({
+    Name = "Aimbot",
+    CurrentValue = false,
+    Flag = "AimbotToggle",
+    Callback = function(Value)
+        -- Enable or disable the aimbot based on the toggle value
+        if Value then
+            -- Enable the aimbot
+            aimbot.Settings.Enabled = true
+            Rayfield:Notify({
+                Title = "Aimbot Enabled",
+                Content = "Aimbot has been activated!",
+                Duration = 6.5,
+                Image = 4483362458,
+            })
+        else
+            -- Disable the aimbot
+            aimbot.Settings.Enabled = false
+            Rayfield:Notify({
+                Title = "Aimbot Disabled",
+                Content = "Aimbot has been deactivated.",
+                Duration = 6.5,
+                Image = 4483362458,
+            })
+        end
+    end,
+})
+
+
+local SensitivitySlider = AimTab:CreateSlider({
+    Name = "Sensitivity",
+    Range = {0, 10},
+    Increment = 0.1,
+    Suffix = "Bananas",
+    CurrentValue = 1,
+    Flag = "Slider6", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+    aimbot.Settings.Sensitivity = Value
+    end
+ })
+
+ 
+
+ local RadiusSlider = AimTab:CreateSlider({
+    Name = "Radius",
+    Range = {60, 300},
+    Increment = 1,
+    Suffix = nil,
+    CurrentValue = 90,
+    Flag = "Slider7", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+    aimbot.FOVSettings.Radius = Value
+    end
+ })
+
+ local Toggle = EspTab:CreateToggle({
+    Name = "Esp",
+    CurrentValue = false,
+    Flag = "EspToggle",
+    Callback = function(Value)
+        -- Enable or disable the aimbot based on the toggle value
+        if Value then
+            -- Enable the aimbot
+            espm.Settings.Enabled = true
+            Rayfield:Notify({
+                Title = "ESP Enabled",
+                Content = "ESP has been activated!",
+                Duration = 6.5,
+                Image = 4483362458,
+            })
+        else
+            -- Disable the aimbot
+            espm.Settings.Enabled = false
+            Rayfield:Notify({
+                Title = "ESP Disabled",
+                Content = "ESP has been deactivated.",
+                Duration = 6.5,
+                Image = 4483362458,
+            })
+        end
+    end,
+})
+
+
+
 Window.ModifyTheme('Amethyst')
-
-
-
-
-
-
